@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0-windows10.0.19041.0</TargetFrameworks>
+        <TargetFrameworks>net8.0-windows10.0.19041.0</TargetFrameworks>
         <OutputType>Exe</OutputType>
         <RootNamespace>SwephCalc.UI</RootNamespace>
         <UseMaui>true</UseMaui>
@@ -26,11 +26,6 @@
         <Platforms>x64</Platforms>
     </PropertyGroup>
 
-	<!-- see https://learn.microsoft.com/ru-ru/dotnet/maui/windows/deployment/publish-cli?view=net-maui-6.0 -->
-	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
-		<AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
-		<PackageCertificateThumbprint>47E1E165F68E9B5D318D3853D2F2DF53C25CBA24</PackageCertificateThumbprint>
-	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
 		<RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
 	</PropertyGroup>
@@ -65,6 +60,11 @@
 		<ProjectReference Include="../SwephCalc/SwephCalc.csproj" />
 	</ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="8.0.100" />
+    </ItemGroup>
+    
 	<!-- see https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/self-contained-deploy/deploy-self-contained-apps -->
 	<Target Name="_RemoveFrameworkReferences" BeforeTargets="_ConvertItems;_CalculateInputsForGenerateCurrentProjectAppxManifest">
 		<ItemGroup>
